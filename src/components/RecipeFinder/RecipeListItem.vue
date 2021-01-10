@@ -7,6 +7,7 @@
     tag="article"
     style="max-width: 20rem"
     class="mb-2 recipe-item"
+    @click="selectRecipe"
   >
     <b-card-text>
       <span
@@ -25,8 +26,6 @@
         {{ ingredient.name }},</span
       >
     </b-card-text>
-
-    <b-button href="#" variant="primary">View Recipe</b-button>
   </b-card>
 </template>
 
@@ -34,11 +33,22 @@
 export default {
   name: "RecipeListItem",
   props: ["recipe"],
+  methods: {
+    selectRecipe(e) {
+      e.preventDefault();
+      console.log(this.recipe.title);
+    },
+  },
 };
 </script>
 
 <style>
 .recipe-item {
   margin: auto;
+  cursor: pointer;
+}
+
+.recipe-item:hover {
+  opacity: 0.5;
 }
 </style>

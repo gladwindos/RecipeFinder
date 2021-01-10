@@ -2,8 +2,8 @@
   <b-container class="recipe-list">
     <b-row>
       <b-col
-        v-bind:key="recipe.id"
-        v-for="recipe in recipes"
+        v-bind:key="recipe.title"
+        v-for="recipe in fetchedRecipes"
         sm="12"
         md="6"
         lg="4"
@@ -16,11 +16,12 @@
 
 <script>
 import RecipeListItem from "./RecipeListItem";
+import { mapGetters } from "vuex";
 
 export default {
   name: "RecipeList",
   components: { RecipeListItem },
-  props: ["recipes"],
+  computed: mapGetters(["fetchedRecipes"]),
 };
 </script>
 
