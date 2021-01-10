@@ -10,6 +10,11 @@ const routes = [
     name: "RecipeFinder",
     component: RecipeFinder,
   },
+  {
+    path: "/recipe/:id",
+    name: "RecipeDetail",
+    component: () => import(/* webpackChunkName: "about" */ '../views/RecipeDetail.vue')
+  },
 ];
 
 const router = new VueRouter({

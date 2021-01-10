@@ -13,7 +13,7 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 new Vue({
-  router,
   store,
+  router,
   render: (h) => h(App),
 }).$mount("#app");

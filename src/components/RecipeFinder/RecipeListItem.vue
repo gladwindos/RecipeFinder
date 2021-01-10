@@ -30,13 +30,15 @@
 </template>
 
 <script>
+// import router from "vue-router";
+
 export default {
   name: "RecipeListItem",
   props: ["recipe"],
   methods: {
     selectRecipe(e) {
       e.preventDefault();
-      console.log(this.recipe.title);
+      this.$router.push({ path: `recipe/${this.recipe.id}/` });
     },
   },
 };
