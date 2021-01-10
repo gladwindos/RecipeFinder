@@ -1,33 +1,31 @@
 <template>
-  <div>
-    <div v-bind:key="recipe.id" v-for="recipe in recipes">
-      <RecipeListItem v-bind:recipe='recipe' />
-    </div>
-  </div>
+  <b-container class="recipe-list">
+    <b-row>
+      <b-col
+        v-bind:key="recipe.id"
+        v-for="recipe in recipes"
+        sm="12"
+        md="6"
+        lg="4"
+      >
+        <RecipeListItem v-bind:recipe="recipe" />
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
-import axios from "axios";
 import RecipeListItem from "./RecipeListItem";
 
 export default {
   name: "RecipeList",
   components: { RecipeListItem },
-  data() {
-    return {
-      recipes: [],
-    };
-  },
-  created() {
-    axios
-      .get(
-        "https://api.spoonacular.com/recipes/findByIngredients?apiKey=951bb07fac7e4a42820f41e9e3f73ece&ingredients=apples,+flour,+sugar&number=5"
-      )
-      .then((res) => (this.recipes = res.data))
-      .catch((err) => console.log(err));
-  },
+  props: ["recipes"],
 };
 </script>
 
 <style>
+.recipe-list {
+  padding: 30px;
+}
 </style>

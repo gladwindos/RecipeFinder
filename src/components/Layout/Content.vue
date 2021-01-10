@@ -12,5 +12,6 @@ export default {
 
 <style scoped>
 .content {
+    /* padding: 30px; */
 }
 </style>

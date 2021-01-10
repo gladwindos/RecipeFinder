@@ -1,38 +1,39 @@
 <template>
-  <div class="main">
-    <Sidebar>
-      <IngredientSearch />
-      <IngredientOutput />
-    </Sidebar>
-    <Content>
-      <RecipeList />
-    </Content>
-  </div>
+  <Content>
+    <IngredientSearch />
+    <RecipeList v-bind:recipes="recipes" />
+  </Content>
 </template>
 
 <script>
-import Sidebar from "../components/Layout/Sidebar";
+import axios from "axios";
+
 import Content from "../components/Layout/Content";
 import IngredientSearch from "../components/RecipeFinder/IngredientSearch";
-import IngredientOutput from "../components/RecipeFinder/IngredientOutput";
 import RecipeList from "../components/RecipeFinder/RecipeList";
 
 export default {
   name: "RecipeFinder",
   components: {
-    Sidebar,
     Content,
     RecipeList,
     IngredientSearch,
-    IngredientOutput,
+  },
+  data() {
+    return {
+      recipes: [],
+    };
+  },
+  created() {
+    axios
+      .get(
+        "https://api.spoonacular.com/recipes/findByIngredients?apiKey=951bb07fac7e4a42820f41e9e3f73ece&ingredients=apples,+flour,+sugar&number=10"
+      )
+      .then((res) => (this.recipes = res.data))
+      .catch((err) => console.log(err));
   },
 };
 </script>
 
 <style>
-.main {
-  display: grid;
-  grid-template-columns: 25% auto;
-  grid-template-rows: auto;
-}
 </style>
