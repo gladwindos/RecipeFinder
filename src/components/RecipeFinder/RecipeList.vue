@@ -16,12 +16,16 @@
 
 <script>
 import RecipeListItem from "./RecipeListItem";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "RecipeList",
   components: { RecipeListItem },
   computed: mapGetters(["fetchedRecipes"]),
+  methods: mapActions(["fetchRandomRecipes"]),
+  created() {
+    this.fetchRandomRecipes();
+  },
 };
 </script>
 

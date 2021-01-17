@@ -1,12 +1,16 @@
 <template>
   <b-card
     :title="recipe.title"
-    :img-src="recipe.image"
+    :img-src="
+      recipe.image
+        ? recipe.image
+        : 'https://p.kindpng.com/picc/s/79-798754_hoteles-y-centros-vacacionales-dish-placeholder-hd-png.png'
+    "
     img-alt="Image"
     img-top
     tag="article"
     style="max-width: 20rem"
-    class="mb-2 recipe-item"
+    class="mb-4 recipe-item"
     @click="selectRecipe"
   >
     <b-card-text>
@@ -30,14 +34,18 @@
 </template>
 
 <script>
-// import router from "vue-router";
+import { mapActions } from "vuex";
 
 export default {
   name: "RecipeListItem",
   props: ["recipe"],
   methods: {
+    ...mapActions(["fetchActiveRecipeSteps"]),
     selectRecipe(e) {
       e.preventDefault();
+
+      this.fetchActiveRecipeSteps(this.recipe);
+
       this.$router.push({ path: `recipe/${this.recipe.id}/` });
     },
   },

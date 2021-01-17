@@ -1,20 +1,30 @@
 <template>
-  <div>recipe: {{recipe}}</div>
+  <div class="recipe-detail">
+    <RecipeIngredients :ingredients="activeRecipe.ingredients" :image="activeRecipe.image" />
+    <RecipeSteps :title="activeRecipe.title" :steps="activeRecipe.steps" />
+  </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
+import RecipeSteps from "../components/RecipeDetail/RecipeSteps";
+import RecipeIngredients from "../components/RecipeDetail/RecipeIngredients";
+
 export default {
   name: "RecipeDetail",
-  data() {
-    return {
-      recipe: "",
-    };
+  components: { RecipeSteps, RecipeIngredients },
+  methods: {
+    ...mapActions(["fetchRecipeSteps"]),
   },
-  created() {
-    this.recipe = this.$route.params.id;
-  },
+  computed: mapGetters(["activeRecipe"]),
 };
 </script>
 
 <style>
+.recipe-detail {
+  display: grid;
+  grid-template-columns: 25% auto;
+  grid-template-rows: auto;
+}
 </style>
